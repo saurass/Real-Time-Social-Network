@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
 import {TestService} from './test.service';
 import {HttpClientModule} from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { PreComponent } from './pre/pre.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent
+    TestComponent,
+    HomeComponent,
+    PreComponent
   ],
   imports: [
     BrowserModule,
