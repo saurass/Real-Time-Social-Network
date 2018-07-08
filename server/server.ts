@@ -2,9 +2,13 @@ import * as express from 'express';
 import * as http from 'http';
 import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
+import * as passport from 'passport';
+import * as session from 'express-session';
+
 import {container} from './container';
 import {urlDB} from './config/database';
 import {setRouters} from './app/routes';
+import {passportLocal} from './config/passport';
 
 container.resolve(function () {
 
@@ -41,6 +45,19 @@ function configureExpress(app) {
     db => {
       console.log('Connected to database !!');
     });
+
+  // Using the node session which is required by passport
+  app.use(session({
+    secret: 'secret key'
+  }));
+
+  // Initialize the passport
+  app.use(passport.initialize());
+  app.use(passport.session());
+  // app.use(passport.flash());
+
+  // Configure the passport object
+  passportLocal(passport);
 
   // Start Morgan for console log activities
   app.use(morgan('dev'));

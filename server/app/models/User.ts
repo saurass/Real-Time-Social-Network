@@ -1,5 +1,7 @@
 import * as mongoose from 'mongoose';
+import * as bcrypt from 'bcrypt-nodejs';
 
+// Model for User data
 let userSchema = mongoose.Schema({
   local: {
     username: {type: String, unique: true},
@@ -26,6 +28,17 @@ let userSchema = mongoose.Schema({
   },
 });
 
+// Encrypt the password using bcrypt
+userSchema.methods.generateHash = (password) => {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// This function will be able to compare the passwords
+userSchema.methods.checkPassword = function (password) {
+  return bcrypt.compareSync(password, this.local.password);
+};
+
 userSchema = mongoose.model('User', userSchema);
 
+// exporting the model
 export {userSchema};
