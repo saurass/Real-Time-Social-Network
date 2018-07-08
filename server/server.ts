@@ -4,6 +4,7 @@ import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
 import * as passport from 'passport';
 import * as session from 'express-session';
+import * as flash from 'connect-flash';
 
 import {container} from './container';
 import {urlDB} from './config/database';
@@ -54,7 +55,7 @@ function configureExpress(app) {
   // Initialize the passport
   app.use(passport.initialize());
   app.use(passport.session());
-  // app.use(passport.flash());
+  app.use(flash());
 
   // Configure the passport object
   passportLocal(passport);
