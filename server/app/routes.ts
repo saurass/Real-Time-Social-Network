@@ -6,7 +6,7 @@ export function setRouters(app) {
 
   router.route('/').get((req, res) => {
     res.status(200).json({
-      'text': 'Hey Saurass !!!',
+      'text': 'Hey Saurass !!',
     });
   });
 

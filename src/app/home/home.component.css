@@ -1,0 +1,19 @@
+main{
+  height: 100%;
+  width: 100%;
+  background-color: #393F42;
+  position: fixed;
+  color: white;
+}
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #fff;
+  box-shadow: 0 1px 0 0 #fff;
+}
+.input-field input[type=password]:focus {
+  border-bottom: 1px solid #fff;
+  box-shadow: 0 1px 0 0 #fff;
+}
+.input-field input[type=email]:focus {
+  border-bottom: 1px solid #fff;
+  box-shadow: 0 1px 0 0 #fff;
+}
