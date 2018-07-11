@@ -26,7 +26,7 @@
       <div class="container">
         <h4 class="center">Sign Up Here</h4>
 
-        <form novalidate [formGroup]="myForm">
+        <form novalidate [formGroup]="myForm" (ngSubmit)="signUp()">
           <div class="row">
             <div class="input-field">
               <label for="email">Email</label>

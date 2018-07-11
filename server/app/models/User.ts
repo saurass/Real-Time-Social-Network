@@ -1,12 +1,13 @@
 import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcrypt-nodejs';
+import * as jwt from 'jsonwebtoken';
 
 // Model for User data
 let userSchema = mongoose.Schema({
   local: {
     username: {type: String, unique: true},
     email: {type: String, unique: true},
-    password: {type: String, unique: true}
+    password: {type: String}
   },
   facebook: {
     id: {type: String, unique: true},
@@ -36,6 +37,18 @@ userSchema.methods.generateHash = (password) => {
 // This function will be able to compare the passwords
 userSchema.methods.checkPassword = function (password) {
   return bcrypt.compareSync(password, this.local.password);
+};
+
+userSchema.methods.generateJwt = function () {
+  let expiry = new Date();
+  expiry.setDate(expiry.getDate() + 7);
+  return jwt.sign({
+    _id: this._id,
+    email: this.email,
+    name: this.email,
+    username: this.username,
+    exp: parseInt(expiry.getTime() / 1000)
+  }, 'secret key');
 };
 
 userSchema = mongoose.model('User', userSchema);

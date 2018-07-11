@@ -1,14 +1,15 @@
 import * as express from 'express';
 
-export function setRouters(app) {
+import AuthCtrl from '../controllers/auth';
+
+export function setRouters(app, passport) {
+
+  const authCtrl = new AuthCtrl();
 
   const router = express.Router();
 
-  router.route('/').get((req, res) => {
-    res.status(200).json({
-      'text': 'Hey Saurass !!',
-    });
-  });
+  router.route('/signup').post(authCtrl.registerUser);
+  router.route('/login').post(authCtrl.loginUser);
 
   // Prefix all the routes here with '/api'
   app.use('/api', router);
