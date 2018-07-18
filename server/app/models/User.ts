@@ -10,19 +10,19 @@ let userSchema = mongoose.Schema({
     password: {type: String}
   },
   facebook: {
-    id: {type: String, unique: true},
+    id: {type: String},
     token: {type: String},
     name: {type: String},
     email: {type: String}
   },
   twitter: {
-    id: {type: String, unique: true},
+    id: {type: String},
     token: {type: String},
     displayName: {type: String},
     username: {type: String}
   },
   google: {
-    id: {type: String, unique: true},
+    id: {type: String},
     token: {type: String},
     name: {type: String},
     email: {type: String}

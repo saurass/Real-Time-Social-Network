@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {SignupService} from '../services/signup.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() {
+  constructor(private userService: SignupService, private router: Router) {
   }
 
   myForm: FormGroup;
@@ -53,6 +55,17 @@ export class HomeComponent implements OnInit {
       password: this.password,
       cnfpass: this.cnfpass
     });
+  }
+
+  signUp() {
+    this.userService.signUp(this.myForm.value).subscribe(
+      res => {
+        this.router.navigate(['/profile']);
+      },
+      error => {
+        console.log('failed');
+      }
+    );
   }
 
 }

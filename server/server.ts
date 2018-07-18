@@ -3,7 +3,7 @@ import * as http from 'http';
 import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
 import * as passport from 'passport';
-import * as session from 'express-session';
+// import * as bodyParser from 'body-parser';
 
 import {container} from './container';
 import {urlDB} from './config/database';
@@ -36,20 +36,12 @@ function configureExpress(app) {
   // Parse all form data
   app.use(express.urlencoded({extended: true}));
 
-  // Setup the view engine
-  app.set('view engine', 'ejs');
-
   // Connection to MongoDB
   mongoose.Promise = global.Promise;
   mongoose.connect(urlDB, {useNewUrlParser: true}).then(
     db => {
       console.log('Connected to database !!');
     });
-
-  // Using the node session which is required by passport
-  app.use(session({
-    secret: 'secret key'
-  }));
 
   // Initialize the passport
   app.use(passport.initialize());

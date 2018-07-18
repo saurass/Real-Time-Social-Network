@@ -9,6 +9,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {HomeComponent} from './home/home.component';
 import {PreComponent} from './pre/pre.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SignupService} from './services/signup.service';
+import {ProfileComponent} from './profile/profile.component';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     AppComponent,
     TestComponent,
     HomeComponent,
-    PreComponent
+    PreComponent,
+    ProfileComponent
   ],
   imports: [
     RoutingModule,
@@ -27,6 +30,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   ],
   providers: [
     HttpClientModule,
+    SignupService,
     TestService
   ],
   bootstrap: [AppComponent]
