@@ -3,6 +3,7 @@ import * as mongoose from 'mongoose';
 import {userSchema as User} from '../app/models/User';
 
 export default class AuthCtrl {
+
   registerUser = (req, res) => {
     passport.authenticate('local-signup', (err, user) => {
         if (err) {
@@ -28,4 +29,26 @@ export default class AuthCtrl {
       }
     )(req, res);
   }
+
+  loginUser = (req, res) => {
+    passport.authenticate('local-sign-in', (err, user, info) => {
+
+      if (err) {
+        res.status(404).json(err);
+        return;
+      }
+
+      if (user) {
+        const token = user.generateJwt();
+        res.status(200);
+        res.json({
+          'token': token
+        });
+      } else {
+        res.status(401).json(info);
+      }
+
+    })(req, res);
+  }
+
 }

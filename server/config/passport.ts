@@ -21,4 +21,31 @@ export function passportLocal(passport) {
     });
   }));
 
+
+  passport.use('local-sign-in', new Strategy({
+      usernameField: 'email'
+    },
+    function (username, password, done) {
+      User.findOne({'local.email': username}, function (err, user) {
+        if (err) {
+          return done(err);
+        }
+
+        if (!user) {
+          return done(null, false, {
+            message: 'User not found'
+          });
+        }
+
+        if (!user.checkPassword(password)) {
+          return done(null, false, {
+            message: 'Password is wrong'
+          });
+        }
+        return done(null, user);
+      });
+    }
+  ));
+
+
 }
