@@ -5,6 +5,7 @@ const container = dependable.container();
 
 const dependencies = [
   ['lodash', 'lodash'],
+  ['jwt', 'express-jwt']
 ];
 
 dependencies.forEach(function (val) {

@@ -1,16 +1,20 @@
+import * as dotenv from 'dotenv';
 import * as express from 'express';
 import * as http from 'http';
 import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
 import * as passport from 'passport';
-// import * as bodyParser from 'body-parser';
+import * as methodOverride from 'method-override';
 
 import {container} from './container';
 import {urlDB} from './config/database';
 import {setRouters} from './app/routes';
 import {passportLocal} from './config/passport';
+import {handleErr} from './controllers/errors';
 
-container.resolve(function () {
+container.resolve(function (jwt) {
+
+  dotenv.load({path: '.env'});
 
   // Initializing express Here
   const app = express();
@@ -22,16 +26,19 @@ container.resolve(function () {
     console.log('Server started on port ' + port);
   });
 
-  configureExpress(app);
+  configureExpress(app, jwt);
 });
 
-function configureExpress(app) {
+function configureExpress(app, jwt) {
 
   // Seting path for static files
   app.use(express.static('public'));
 
   // Parse all JSON here
   app.use(express.json());
+
+  app.use(methodOverride);
+  app.use(handleErr);
 
   // Parse all form data
   app.use(express.urlencoded({extended: true}));
@@ -53,5 +60,5 @@ function configureExpress(app) {
   app.use(morgan('dev'));
 
   // Set Up the routes
-  setRouters(app, passport);
+  setRouters(app, passport, jwt);
 }
