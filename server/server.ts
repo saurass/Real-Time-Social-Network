@@ -4,7 +4,6 @@ import * as http from 'http';
 import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
 import * as passport from 'passport';
-import * as methodOverride from 'method-override';
 
 import {container} from './container';
 import {urlDB} from './config/database';
@@ -37,9 +36,6 @@ function configureExpress(app, jwt) {
   // Parse all JSON here
   app.use(express.json());
 
-  app.use(methodOverride);
-  app.use(handleErr);
-
   // Parse all form data
   app.use(express.urlencoded({extended: true}));
 
@@ -61,4 +57,7 @@ function configureExpress(app, jwt) {
 
   // Set Up the routes
   setRouters(app, passport, jwt);
+
+  // handling all the errors that may occur
+  app.use(handleErr);
 }
