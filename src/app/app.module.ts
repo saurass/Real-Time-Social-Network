@@ -9,8 +9,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {HomeComponent} from './home/home.component';
 import {PreComponent} from './pre/pre.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {SignupService} from './services/signup.service';
+import {AuthService} from './services/auth.service';
 import {ProfileComponent} from './profile/profile.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {ProfileComponent} from './profile/profile.component';
     TestComponent,
     HomeComponent,
     PreComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoginComponent
   ],
   imports: [
     RoutingModule,
@@ -30,7 +32,7 @@ import {ProfileComponent} from './profile/profile.component';
   ],
   providers: [
     HttpClientModule,
-    SignupService,
+    AuthService,
     TestService
   ],
   bootstrap: [AppComponent]

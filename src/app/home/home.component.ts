@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {SignupService} from '../services/signup.service';
+import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private userService: SignupService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   myForm: FormGroup;
@@ -58,14 +58,11 @@ export class HomeComponent implements OnInit {
   }
 
   signUp() {
-    this.userService.signUp(this.myForm.value).subscribe(
-      res => {
-        this.router.navigate(['/profile']);
-      },
-      error => {
-        console.log('failed');
-      }
-    );
+    this.authService.register(this.myForm.value).subscribe(() => {
+      this.router.navigateByUrl('/profile');
+    }, (err) => {
+      console.error(err);
+    });
   }
 
 }
