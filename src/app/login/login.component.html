@@ -1,3 +1,48 @@
-<p>
-  login works!
-</p>
+<main>
+
+  <!--Space for top writtings-->
+  <div class="row"></div>
+  <div class="row"></div>
+  <!--Space for top writtings-->
+
+  <!--Small heading-->
+  <h6 class="center">CLUB TECHNOCRATS</h6>
+  <!--Small heading end-->
+
+  <!--Big heading-->
+  <h2 class="center hide-on-small-only">Saurass Social Network</h2>
+  <h3 class="center show-on-small hide-on-med-and-up">Saurass Social Network</h3>
+  <div class="row"></div>
+  <!--Big heading end-->
+
+  <p class="red-text" *ngIf="username.invalid && username.dirty">Invalid Username</p>
+  <p class="red-text" *ngIf="password.invalid && password.dirty">Invalid password</p>
+
+  <div class="row">
+    <div class="col s10 m4 l4 offset-s1 offset-m4 offset-l4 z-depth-4">
+      <div class="container">
+        <h4 class="center">Login Here</h4>
+
+        <form novalidate [formGroup]="loginForm" (ngSubmit)="signIn()">
+          <div class="row">
+            <div class="input-field">
+              <label for="username">Username</label>
+              <input type="text" name="username" formControlName="username" id="username" required="required">
+            </div>
+            <div class="input-field">
+              <label for="password">Password</label>
+              <input type="password" name="password" formControlName="password" id="password" required="required">
+            </div>
+            <div>
+              <button type="submit" class="btn btn-block red right" [disabled]="!loginForm.valid">Login</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <!--Footer space-->
+      <div class="row"></div>
+      <!--Footer space end-->
+    </div>
+  </div>
+</main>

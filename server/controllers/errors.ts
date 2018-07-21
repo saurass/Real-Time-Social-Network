@@ -4,5 +4,6 @@ export function handleErr(err, req, res, next) {
     res.status(401);
     res.json({'message': 'Token Not Provided'});
   }
+  console.log(err);
 
 }
