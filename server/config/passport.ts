@@ -23,26 +23,26 @@ export function passportLocal(passport) {
 
 
   passport.use('local-sign-in', new Strategy({
-      usernameField: 'email'
+      usernameField: 'username'
     },
     function (username, password, done) {
-      User.findOne({'local.email': username}, function (err, user) {
-        if (err) {
-          return done(err);
-        }
+      process.nextTick(() => {
+        User.findOne({'local.username': username}, function (err, user) {
+          if (err) {
+            return done(err);
+          }
 
-        if (!user) {
-          return done(null, false, {
-            message: 'User not found'
-          });
-        }
-
-        if (!user.checkPassword(password)) {
-          return done(null, false, {
-            message: 'Password is wrong'
-          });
-        }
-        return done(null, user);
+          if (user) {
+            if (!user.checkPassword(password)) {
+              return done(null, false, {
+                message: 'Password is wrong'
+              });
+            }
+            return done(null, user);
+          } else {
+            return done(null, false);
+          }
+        });
       });
     }
   ));

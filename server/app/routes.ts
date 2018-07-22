@@ -15,7 +15,7 @@ export function setRouters(app, passport, jwt) {
 
   router.route('/signup').post(authCtrl.registerUser);
   router.route('/login').post(authCtrl.loginUser);
-  router.get('/profile', auth, (req, res) => {
+  router.post('/profile', auth, (req, res) => {
     res.send('Your Profile is here !!!');
   });
 

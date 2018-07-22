@@ -11,7 +11,8 @@ import {PreComponent} from './pre/pre.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './services/auth.service';
 import {ProfileComponent} from './profile/profile.component';
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './login/login.component';
+import {AuthGuard} from './guards/auth.guard';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { LoginComponent } from './login/login.component';
   providers: [
     HttpClientModule,
     AuthService,
-    TestService
+    TestService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

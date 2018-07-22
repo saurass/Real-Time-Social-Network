@@ -12,10 +12,6 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  // signUp(user: User): Observable<User> {
-  //   return this.http.post<User>('/api/signup', user);
-  // }
-
   private saveToken(token: string): void {
     localStorage.setItem('token', token);
     this.token = token;
@@ -85,7 +81,7 @@ export class AuthService {
   }
 
   public profile(): Observable<any> {
-    return this.request('get', 'profile');
+    return this.request('post', 'profile');
   }
 
 }

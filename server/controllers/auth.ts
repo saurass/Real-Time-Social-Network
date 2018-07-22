@@ -45,7 +45,8 @@ export default class AuthCtrl {
           'token': token
         });
       } else {
-        res.status(401).json(info);
+        console.log(err);
+        res.status(401).send(info);
       }
 
     })(req, res);
