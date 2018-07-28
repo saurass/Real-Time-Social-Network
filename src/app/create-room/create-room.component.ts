@@ -21,7 +21,6 @@ export class CreateRoomComponent implements OnInit {
   ngOnInit() {
     this.createFormControl();
     this.createFormGroup();
-
   }
 
   createFormControl() {
