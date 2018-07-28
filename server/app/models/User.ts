@@ -40,13 +40,12 @@ userSchema.methods.checkPassword = function (password) {
 };
 
 userSchema.methods.generateJwt = function () {
-  let expiry = new Date();
+  const expiry = new Date();
   expiry.setDate(expiry.getDate() + 7);
   return jwt.sign({
     _id: this._id,
-    email: this.email,
-    name: this.email,
-    username: this.username,
+    email: this.local.email,
+    username: this.local.username,
     exp: parseInt(expiry.getTime() / 1000)
   }, process.env.SECRET_TOKEN);
 };

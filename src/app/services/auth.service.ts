@@ -51,11 +51,11 @@ export class AuthService {
     }
   }
 
-  private request(method: 'post' | 'get', type, user?: User): Observable<any> {
+  public request(method: 'post' | 'get', type, user?: any): Observable<any> {
     let base;
 
     if (method === 'post') {
-      base = this.http.post(`/api/${type}`, user);
+      base = this.http.post(`/api/${type}`, user, {headers: {Authorization: `Bearer ${this.getToken()}`}});
     } else {
       base = this.http.get(`/api/${type}`, {headers: {Authorization: `Bearer ${this.getToken()}`}});
     }

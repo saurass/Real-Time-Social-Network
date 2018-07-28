@@ -13,6 +13,8 @@ import {AuthService} from './services/auth.service';
 import {ProfileComponent} from './profile/profile.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './guards/auth.guard';
+import {CreateRoomComponent} from './create-room/create-room.component';
+import {ChatRoomService} from "./services/chat-room.service";
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import {AuthGuard} from './guards/auth.guard';
     HomeComponent,
     PreComponent,
     ProfileComponent,
-    LoginComponent
+    LoginComponent,
+    CreateRoomComponent
   ],
   imports: [
     RoutingModule,
@@ -35,7 +38,8 @@ import {AuthGuard} from './guards/auth.guard';
     HttpClientModule,
     AuthService,
     TestService,
-    AuthGuard
+    AuthGuard,
+    ChatRoomService
   ],
   bootstrap: [AppComponent]
 })
