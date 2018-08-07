@@ -1,0 +1,39 @@
+#side-block {
+  height: 100%;
+  background-color: pink;
+}
+
+.z-index-2 {
+  z-index: 2;
+}
+
+.room-info-div {
+  height: 60px;
+}
+
+.chat-room {
+  height: 200px;
+  background-color: pink;
+}
+
+.msg-box {
+  position: fixed;
+  bottom: 5px;
+  margin-left: 2%;
+}
+
+.msg-btn{
+  position: fixed;
+  bottom: 5px;
+  right: 2%;
+}
+
+.msg-area{
+  height: 100%;
+  overflow: hidden;
+}
+
+.msg-container{
+  width: 90%;
+  margin-left: 5%;
+}

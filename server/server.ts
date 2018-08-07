@@ -4,6 +4,7 @@ import * as http from 'http';
 import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
 import * as passport from 'passport';
+import * as socket from 'socket.io';
 
 import {container} from './container';
 import {urlDB} from './config/database';
@@ -21,9 +22,13 @@ container.resolve(function (jwt) {
   const server = http.createServer(app);
 
   // Starting the server on the port
-  server.listen(port, () => {
+  const socketServer = server.listen(port, () => {
     console.log('Server started on port ' + port);
   });
+
+  // Initialize Socket here
+  const io = socket(server);
+  configureIO(io);
 
   configureExpress(app, jwt);
 });
@@ -60,4 +65,17 @@ function configureExpress(app, jwt) {
 
   // handling all the errors that may occur
   app.use(handleErr);
+}
+
+function configureIO(io) {
+  io.on('connection', function (socket) {
+    // console.log('socket connection established !!', socket.id);
+    socket.on('createMessage', function (data) {
+      io.to(data.room).emit('createMessage', data);
+    });
+    socket.on('join', (params, callback) => {
+      socket.join(params.room);
+      callback();
+    });
+  });
 }

@@ -1,0 +1,36 @@
+<div class="navbar-fixed z-index-2">
+  <nav>
+    <div class="nav-wrapper black">
+      <a href="#" class="brand-logo">Saurass Site</a>
+      <ul class="right hide-on-med-and-down">
+        <!--<li><a href="sass.html">Sass</a></li>-->
+        <!--<li><a href="badges.html">Components</a></li>-->
+      </ul>
+    </div>
+  </nav>
+</div>
+<h3 class="blue-text">{{route.params._value.roomName | uppercase}} Room</h3>
+
+<div class="container msg-area">
+  <div class="col m12 grey rounded">
+    <div class="col m12">
+      <span class="badge right">You</span>
+    </div>
+    <div class="row"></div>
+    <div class="msg-container">jskjkdjsd</div>
+    <div class="row"></div>
+    <div class="row"></div>
+  </div>
+</div>
+
+<div class="row">
+  <form [formGroup]="messageForm" (ngSubmit)="sendMessage()" novalidate>
+    <div class="col s10 m11 l11 msg-box input-field left" align="center">
+      <label for="message-box">Text Message Here</label>
+      <input type="text" id="message-box" formControlName="messageText">
+    </div>
+    <button class="btn btn-floating btn-large red right msg-btn waves-effect" type="submit"
+            [disabled]="!messageForm.valid || !messageText.dirty"><i
+      class="material-icons right">send</i></button>
+  </form>
+</div>

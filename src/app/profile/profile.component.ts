@@ -13,13 +13,14 @@ export class ProfileComponent implements OnInit {
   }
 
   allRooms: string[] = [];
+  userId: string = this.authService.getUserDetails()._id;
 
   private userDetails = this.authService.getUserDetails();
 
   ngOnInit() {
     this.chatService.getAllRooms().subscribe((data) => {
       data.forEach(ele => {
-        this.allRooms.push(ele.roomName);
+        this.allRooms.push(ele);
       });
     });
   }

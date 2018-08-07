@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {SocketIoModule, SocketIoConfig} from 'ng-socket-io';
 
 import {RoutingModule} from './routing.module';
 import {AppComponent} from './app.component';
@@ -14,8 +15,11 @@ import {ProfileComponent} from './profile/profile.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './guards/auth.guard';
 import {CreateRoomComponent} from './create-room/create-room.component';
-import {ChatRoomService} from "./services/chat-room.service";
+import {ChatRoomService} from './services/chat-room.service';
+import {RoomComponent} from './room/room.component';
+import {SocketService} from './services/socket.service';
 
+const config: SocketIoConfig = {url: 'http://localhost:3000', options: {}};
 
 @NgModule({
   declarations: [
@@ -25,21 +29,24 @@ import {ChatRoomService} from "./services/chat-room.service";
     PreComponent,
     ProfileComponent,
     LoginComponent,
-    CreateRoomComponent
+    CreateRoomComponent,
+    RoomComponent
   ],
   imports: [
     RoutingModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     HttpClientModule,
     AuthService,
     TestService,
     AuthGuard,
-    ChatRoomService
+    ChatRoomService,
+    SocketService
   ],
   bootstrap: [AppComponent]
 })
